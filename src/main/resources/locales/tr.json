@@ -1,3 +1,80 @@
 {
-  "hello-world": "Merhaba dünya!"
+  "common": {
+    "close": "Kapat",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "error": "Hata",
+    "seconds": "Saniye",
+    "edit": "Düzenle",
+    "delete": "Sil"
+  },
+  "pages": {
+    "redirects": {
+      "title": "URL Yönlendirmeleri",
+      "new-redirect": "Yeni Yönlendirme",
+      "count": "{count} Yönlendirme",
+      "table": {
+        "id": "ID",
+        "title": "Başlık",
+        "path": "Adres",
+        "target": "Yönlendirme URL",
+        "delay": "Gecikme",
+        "actions": "İşlemler"
+      },
+      "fields": {
+        "title": "Başlık",
+        "path": "Adres",
+        "path-hint": "Yönlendirmeyi tetikleyecek dış adres",
+        "path-hint-short": "Adres",
+        "target": "Yönlendirme URL",
+        "delay": "Gecikme",
+        "show-intermediate": "Ara sayfa göster",
+        "design": "Tasarım",
+        "open-new-tab": "Yeni sekmede aç",
+        "show-in-nav": "Navigasyonda göster",
+        "require-login": "Giriş yapmışsa",
+        "require-permission": "Yetki gereksin",
+        "permission-node": "Yetki Düğümü",
+        "custom-content": "Özel Sayfa İçeriği",
+        "design-options": {
+          "default": "Varsayılan",
+          "minimal": "Minimal",
+          "modern": "Modern",
+          "custom": "Özel"
+        },
+        "placeholders": {
+          "path": "discord",
+          "target": "https://discord.gg/pano",
+          "permission": "pano.custom.perm"
+        }
+      },
+      "modals": {
+        "create-title": "URL Yönlendirmesi Oluştur",
+        "edit-title": "URL Yönlendirmesini Düzenle",
+        "delete-title": "URL Yönlendirmesini Sil",
+        "delete-confirm": "{title} yönlendirmesini silmek istediğinize emin misiniz? Bu işlem geri alınamaz."
+      },
+      "toasts": {
+        "create-success": "URL yönlendirmesi başarıyla oluşturuldu.",
+        "edit-success": "URL yönlendirmesi başarıyla güncellendi.",
+        "delete-success": "URL yönlendirmesi başarıyla silindi.",
+        "copy-success": "Bağlantı panoya kopyalandı."
+      },
+      "actions": {
+        "label": "İşlemler",
+        "copy-link": "Bağlantıyı Kopyala"
+      }
+    }
+  },
+  "permissions": {
+    "MANAGE_REDIRECTS": {
+      "title": "Yönlendirmeleri Düzenle",
+      "description": "Tema içinde kullanılacak bir yönlendirme oluşturabilir, silebilir ve düzenleyebilir."
+    }
+  },
+  "activity-logs": {
+    "CREATED_REDIRECT": "<b>{username}</b>, \"{title}\" yönlendirmesini oluşturdu.",
+    "UPDATED_REDIRECT": "<b>{username}</b>, \"{title}\" yönlendirmesini güncelledi.",
+    "DELETED_REDIRECT": "<b>{username}</b>, \"{title}\" yönlendirmesini sildi."
+  }
 }

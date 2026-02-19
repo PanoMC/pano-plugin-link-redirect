@@ -1,5 +1,5 @@
 {
-  "name": "pano-boilerplate-plugin",
+  "name": "pano-plugin-link-redirect",
   "type": "module",
   "exports": {
     ".": {

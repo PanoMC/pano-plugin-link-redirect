@@ -1,3 +1,80 @@
 {
-  "hello-world": "Hello world!"
+  "common": {
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "error": "Error",
+    "seconds": "Seconds",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "pages": {
+    "redirects": {
+      "title": "Link Redirects",
+      "new-redirect": "New Redirect",
+      "count": "{count} Link Redirects",
+      "table": {
+        "id": "ID",
+        "title": "Title",
+        "path": "Path",
+        "target": "Target URL",
+        "delay": "Delay",
+        "actions": "Actions"
+      },
+      "fields": {
+        "title": "Title",
+        "path": "Path",
+        "path-hint": "External path that will trigger the redirect",
+        "path-hint-short": "Path",
+        "target": "Target URL",
+        "delay": "Delay",
+        "show-intermediate": "Show intermediate page",
+        "design": "Design",
+        "open-new-tab": "Open in new tab",
+        "show-in-nav": "Show in navigation",
+        "require-login": "Require login",
+        "require-permission": "Require permission",
+        "permission-node": "Permission Node",
+        "custom-content": "Custom Page Content",
+        "design-options": {
+          "default": "Default",
+          "minimal": "Minimal",
+          "modern": "Modern",
+          "custom": "Custom"
+        },
+        "placeholders": {
+          "path": "discord",
+          "target": "https://discord.gg/pano",
+          "permission": "pano.custom.perm"
+        }
+      },
+      "modals": {
+        "create-title": "Create Link Redirect",
+        "edit-title": "Edit Link Redirect",
+        "delete-title": "Delete Link Redirect",
+        "delete-confirm": "Are you sure you want to delete {title}? This action cannot be undone."
+      },
+      "toasts": {
+        "create-success": "Link redirect created successfully.",
+        "edit-success": "Link redirect updated successfully.",
+        "delete-success": "Link redirect deleted successfully.",
+        "copy-success": "Link copied to clipboard."
+      },
+      "actions": {
+        "label": "Actions",
+        "copy-link": "Copy Link"
+      }
+    }
+  },
+  "permissions": {
+    "MANAGE_REDIRECTS": {
+      "title": "Manage Redirects",
+      "description": "Can create, delete, edit a redirect which will be used in theme."
+    }
+  },
+  "activity-logs": {
+    "CREATED_REDIRECT": "<b>{username}</b> created the \"{title}\" redirect.",
+    "UPDATED_REDIRECT": "<b>{username}</b> updated the \"{title}\" redirect.",
+    "DELETED_REDIRECT": "<b>{username}</b> deleted the \"{title}\" redirect."
+  }
 }
