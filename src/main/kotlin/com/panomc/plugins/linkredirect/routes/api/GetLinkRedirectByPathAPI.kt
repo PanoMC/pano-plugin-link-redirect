@@ -12,6 +12,7 @@ import com.panomc.plugins.linkredirect.LinkRedirectPlugin
 import com.panomc.plugins.linkredirect.db.dao.RedirectDao
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.validation.ValidationHandler
+import io.vertx.ext.web.validation.builder.ValidationHandlerBuilder
 import io.vertx.json.schema.SchemaRepository
 
 @Endpoint
@@ -34,7 +35,9 @@ class GetLinkRedirectByPathAPI(
         plugin.applicationContext.getBean(PermissionManager::class.java)
     }
 
-    override fun getValidationHandler(schemaRepository: SchemaRepository): ValidationHandler? = null
+    override fun getValidationHandler(schemaRepository: SchemaRepository): ValidationHandler =
+        ValidationHandlerBuilder.create(schemaRepository)
+            .build()
 
     override suspend fun handle(context: RoutingContext): Result {
         val path = context.request().getParam("path") ?: throw NotFound()
