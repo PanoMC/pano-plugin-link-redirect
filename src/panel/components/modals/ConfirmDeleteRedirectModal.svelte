@@ -78,7 +78,7 @@
     if (!res.error) {
       hide();
       callback();
-      showToast('plugins.pano-plugin-link-redirect.pages.redirects.toasts.delete-success');
+      showToast('plugins.pano-plugin-link-redirects.pages.redirects.toasts.delete-success');
     } else {
         showToast('common.error');
     }

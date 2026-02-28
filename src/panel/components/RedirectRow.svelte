@@ -11,7 +11,7 @@
   function copyLink() {
     const url = new URL(window.location.origin + redirect.path);
     copy(url.toString());
-    showToast('plugins.pano-plugin-link-redirect.pages.redirects.toasts.copy-success');
+    showToast('plugins.pano-plugin-link-redirects.pages.redirects.toasts.copy-success');
   }
 </script>
 
