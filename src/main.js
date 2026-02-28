@@ -4,7 +4,7 @@ import { _ as i18n } from '@panomc/sdk/utils/language';
 import ApiUtil from '@panomc/sdk/utils/api';
 import { showToast } from '@panomc/sdk/toasts';
 
-const pluginId = 'pano-plugin-link-redirect';
+const pluginId = 'pano-plugin-link-redirects';
 
 // this is to render plugin translations
 export const _ = derived(i18n, ($_fn) => {
@@ -12,7 +12,7 @@ export const _ = derived(i18n, ($_fn) => {
 });
 
 
-export default class PanoLinkRedirectPlugin extends PanoPlugin {
+export default class PanoLinkRedirectsPlugin extends PanoPlugin {
   async onLoad() {
     const pano = this.pano;
 
@@ -86,7 +86,7 @@ export default class PanoLinkRedirectPlugin extends PanoPlugin {
             });
           }
         } catch (e) {
-          console.error('[LinkRedirectPlugin] Failed to fetch redirects for route registration', e);
+          console.error('[LinkRedirectsPlugin] Failed to fetch redirects for route registration', e);
         }
       });
     }

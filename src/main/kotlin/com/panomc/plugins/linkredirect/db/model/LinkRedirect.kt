@@ -2,7 +2,7 @@ package com.panomc.plugins.linkredirect.db.model
 
 import com.panomc.platform.db.DBEntity
 
-data class RedirectModel(
+data class LinkRedirect(
     val id: Long = -1L,
     val title: String,
     val path: String,

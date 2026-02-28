@@ -7,7 +7,7 @@ import com.panomc.platform.error.BadRequest
 import com.panomc.platform.error.NotFound
 import com.panomc.platform.model.*
 import com.panomc.plugins.linkredirect.LinkRedirectPlugin
-import com.panomc.plugins.linkredirect.db.dao.RedirectDao
+import com.panomc.plugins.linkredirect.db.dao.LinkRedirectDao
 import com.panomc.plugins.linkredirect.log.RedirectUpdatedLog
 import com.panomc.plugins.linkredirect.permission.ManageRedirectsPermission
 import io.vertx.ext.web.RoutingContext
@@ -22,7 +22,7 @@ import io.vertx.json.schema.common.dsl.Schemas.*
 @Endpoint
 class PanelUpdateLinkRedirectAPI(
     private val plugin: LinkRedirectPlugin,
-    private val redirectDao: RedirectDao
+    private val linkRedirectDao: LinkRedirectDao
 ) : PanelApi() {
     override val paths = listOf(Path("/api/panel/link-redirects/:id", RouteType.PUT))
 
@@ -82,10 +82,10 @@ class PanelUpdateLinkRedirectAPI(
         }
 
         val sqlClient = databaseManager.getSqlClient()
-        val existing = redirectDao.getById(id, sqlClient) ?: throw NotFound()
+        val existing = linkRedirectDao.getById(id, sqlClient) ?: throw NotFound()
 
         // Check if path changed and if new path exists
-        if (existing.path != path && redirectDao.getByPath(path, sqlClient) != null) {
+        if (existing.path != path && linkRedirectDao.getByPath(path, sqlClient) != null) {
             throw BadRequest()
         }
 
@@ -106,7 +106,7 @@ class PanelUpdateLinkRedirectAPI(
             updatedAt = System.currentTimeMillis()
         )
 
-        redirectDao.update(updated, sqlClient)
+        linkRedirectDao.update(updated, sqlClient)
 
         val userId = authProvider.getUserIdFromRoutingContext(context)
         val username = databaseManager.userDao.getUsernameFromUserId(userId, sqlClient)!!

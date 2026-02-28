@@ -1,8 +1,8 @@
 package com.panomc.plugins.linkredirect.db.impl
 
 import com.panomc.platform.annotation.Dao
-import com.panomc.plugins.linkredirect.db.dao.RedirectDao
-import com.panomc.plugins.linkredirect.db.model.RedirectModel
+import com.panomc.plugins.linkredirect.db.dao.LinkRedirectDao
+import com.panomc.plugins.linkredirect.db.model.LinkRedirect
 import io.vertx.kotlin.coroutines.coAwait
 import io.vertx.mysqlclient.MySQLClient
 import io.vertx.sqlclient.Row
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Scope
 @Dao
 @Lazy
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-class RedirectDaoImpl : RedirectDao() {
+class LinkRedirectDaoImpl : LinkRedirectDao() {
 
     override suspend fun init(sqlClient: SqlClient) {
         sqlClient.query(
@@ -45,7 +45,7 @@ class RedirectDaoImpl : RedirectDao() {
         ).execute().coAwait()
     }
 
-    override suspend fun add(redirect: RedirectModel, sqlClient: SqlClient): Long {
+    override suspend fun add(redirect: LinkRedirect, sqlClient: SqlClient): Long {
         val query = """
             INSERT INTO `${getTablePrefix() + tableName}` 
             (`title`, `path`, `targetUrl`, `delay`, `showIntermediatePage`, `intermediatePageDesign`, `useCustomPage`, `openInNewTab`, `showInNavigation`, `requireLogin`, `requirePermission`, `permissionNode`, `htmlContent`, `createdAt`, `updatedAt`) 
@@ -75,7 +75,7 @@ class RedirectDaoImpl : RedirectDao() {
         return rows.property(MySQLClient.LAST_INSERTED_ID)
     }
 
-    override suspend fun update(redirect: RedirectModel, sqlClient: SqlClient) {
+    override suspend fun update(redirect: LinkRedirect, sqlClient: SqlClient) {
         val query = """
             UPDATE `${getTablePrefix() + tableName}` SET 
             `title` = ?, `path` = ?, `targetUrl` = ?, `delay` = ?, `showIntermediatePage` = ?, `intermediatePageDesign` = ?, `useCustomPage` = ?, `openInNewTab` = ?, `showInNavigation` = ?, `requireLogin` = ?, `requirePermission` = ?, `permissionNode` = ?, `htmlContent` = ?, `updatedAt` = ? 
@@ -108,26 +108,26 @@ class RedirectDaoImpl : RedirectDao() {
             .execute(Tuple.of(id)).coAwait()
     }
 
-    override suspend fun getById(id: Long, sqlClient: SqlClient): RedirectModel? {
+    override suspend fun getById(id: Long, sqlClient: SqlClient): LinkRedirect? {
         val rows = sqlClient.preparedQuery("SELECT * FROM `${getTablePrefix() + tableName}` WHERE `id` = ?")
             .execute(Tuple.of(id)).coAwait()
         return rows.toModels().firstOrNull()
     }
 
-    override suspend fun getByPath(path: String, sqlClient: SqlClient): RedirectModel? {
+    override suspend fun getByPath(path: String, sqlClient: SqlClient): LinkRedirect? {
         val rows = sqlClient.preparedQuery("SELECT * FROM `${getTablePrefix() + tableName}` WHERE `path` = ?")
             .execute(Tuple.of(path)).coAwait()
         return rows.toModels().firstOrNull()
     }
 
-    override suspend fun getAll(page: Int, sqlClient: SqlClient): List<RedirectModel> {
+    override suspend fun getAll(page: Int, sqlClient: SqlClient): List<LinkRedirect> {
         val offset = (page - 1) * 10
         val rows = sqlClient.preparedQuery("SELECT * FROM `${getTablePrefix() + tableName}` ORDER BY `id` DESC LIMIT 10 OFFSET ?")
             .execute(Tuple.of(offset)).coAwait()
         return rows.toModels()
     }
 
-    override suspend fun getList(sqlClient: SqlClient): List<RedirectModel> {
+    override suspend fun getList(sqlClient: SqlClient): List<LinkRedirect> {
         val rows = sqlClient.query("SELECT * FROM `${getTablePrefix() + tableName}` ORDER BY `id` DESC")
             .execute().coAwait()
         return rows.toModels()
@@ -142,9 +142,9 @@ class RedirectDaoImpl : RedirectDao() {
         sqlClient.query("DROP TABLE IF EXISTS `${getTablePrefix() + tableName}`").execute().coAwait()
     }
 
-    private fun RowSet<Row>.toModels(): List<RedirectModel> {
+    private fun RowSet<Row>.toModels(): List<LinkRedirect> {
         return this.map { row ->
-            RedirectModel(
+            LinkRedirect(
                 id = row.getLong("id")!!,
                 title = row.getString("title"),
                 path = row.getString("path"),

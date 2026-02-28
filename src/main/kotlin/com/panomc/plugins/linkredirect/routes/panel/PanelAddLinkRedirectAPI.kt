@@ -6,8 +6,8 @@ import com.panomc.platform.db.DatabaseManager
 import com.panomc.platform.error.BadRequest
 import com.panomc.platform.model.*
 import com.panomc.plugins.linkredirect.LinkRedirectPlugin
-import com.panomc.plugins.linkredirect.db.dao.RedirectDao
-import com.panomc.plugins.linkredirect.db.model.RedirectModel
+import com.panomc.plugins.linkredirect.db.dao.LinkRedirectDao
+import com.panomc.plugins.linkredirect.db.model.LinkRedirect
 import com.panomc.plugins.linkredirect.log.RedirectCreatedLog
 import com.panomc.plugins.linkredirect.permission.ManageRedirectsPermission
 import io.vertx.ext.web.RoutingContext
@@ -20,7 +20,7 @@ import io.vertx.json.schema.common.dsl.Schemas.*
 @Endpoint
 class PanelAddLinkRedirectAPI(
     private val plugin: LinkRedirectPlugin,
-    private val redirectDao: RedirectDao
+    private val linkRedirectDao: LinkRedirectDao
 ) : PanelApi() {
     override val paths = listOf(Path("/api/panel/link-redirects", RouteType.POST))
 
@@ -80,11 +80,11 @@ class PanelAddLinkRedirectAPI(
         val sqlClient = databaseManager.getSqlClient()
         
         // Check if path already exists
-        if (redirectDao.getByPath(path, sqlClient) != null) {
+        if (linkRedirectDao.getByPath(path, sqlClient) != null) {
             throw BadRequest() // Or a more specific error like AlreadyExists
         }
 
-        val redirect = RedirectModel(
+        val redirect = LinkRedirect(
             title = title,
             path = path,
             targetUrl = data.getString("targetUrl"),
@@ -100,7 +100,7 @@ class PanelAddLinkRedirectAPI(
             htmlContent = data.getString("htmlContent")
         )
 
-        redirectDao.add(redirect, sqlClient)
+        linkRedirectDao.add(redirect, sqlClient)
 
         val userId = authProvider.getUserIdFromRoutingContext(context)
         val username = databaseManager.userDao.getUsernameFromUserId(userId, sqlClient)!!

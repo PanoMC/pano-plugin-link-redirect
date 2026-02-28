@@ -4,7 +4,7 @@ import com.panomc.platform.annotation.Endpoint
 import com.panomc.platform.db.DatabaseManager
 import com.panomc.platform.model.*
 import com.panomc.plugins.linkredirect.LinkRedirectPlugin
-import com.panomc.plugins.linkredirect.db.dao.RedirectDao
+import com.panomc.plugins.linkredirect.db.dao.LinkRedirectDao
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.validation.ValidationHandler
 import io.vertx.ext.web.validation.builder.ValidationHandlerBuilder
@@ -13,7 +13,7 @@ import io.vertx.json.schema.SchemaRepository
 @Endpoint
 class GetLinkRedirectsAPI(
     private val plugin: LinkRedirectPlugin,
-    private val redirectDao: RedirectDao
+    private val linkRedirectDao: LinkRedirectDao
 ) : Api() {
     override val paths = listOf(Path("/api/link-redirects", RouteType.GET))
 
@@ -27,7 +27,7 @@ class GetLinkRedirectsAPI(
 
     override suspend fun handle(context: RoutingContext): Result {
         val sqlClient = databaseManager.getSqlClient()
-        val redirects = redirectDao.getList(sqlClient)
+        val redirects = linkRedirectDao.getList(sqlClient)
 
         val response = redirects.map { redirect ->
             mapOf(

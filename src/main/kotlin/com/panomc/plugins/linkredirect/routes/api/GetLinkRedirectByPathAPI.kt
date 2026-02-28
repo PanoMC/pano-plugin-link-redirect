@@ -9,7 +9,7 @@ import com.panomc.platform.error.NotFound
 import com.panomc.platform.error.NotLoggedIn
 import com.panomc.platform.model.*
 import com.panomc.plugins.linkredirect.LinkRedirectPlugin
-import com.panomc.plugins.linkredirect.db.dao.RedirectDao
+import com.panomc.plugins.linkredirect.db.dao.LinkRedirectDao
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.validation.ValidationHandler
 import io.vertx.ext.web.validation.builder.ValidationHandlerBuilder
@@ -18,7 +18,7 @@ import io.vertx.json.schema.SchemaRepository
 @Endpoint
 class GetLinkRedirectByPathAPI(
     private val plugin: LinkRedirectPlugin,
-    private val redirectDao: RedirectDao
+    private val linkRedirectDao: LinkRedirectDao
 ) : Api() {
 
     override val paths = listOf(Path("/api/link-redirects/check", RouteType.GET))
@@ -43,7 +43,7 @@ class GetLinkRedirectByPathAPI(
         val path = context.request().getParam("path") ?: throw NotFound()
 
         val sqlClient = databaseManager.getSqlClient()
-        val redirect = redirectDao.getByPath(path, sqlClient) ?: throw NotFound()
+        val redirect = linkRedirectDao.getByPath(path, sqlClient) ?: throw NotFound()
 
         if (redirect.requireLogin) {
             val userId = authProvider.getUserIdFromRoutingContext(context)

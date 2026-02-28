@@ -5,7 +5,7 @@ import com.panomc.platform.auth.AuthProvider
 import com.panomc.platform.db.DatabaseManager
 import com.panomc.platform.model.*
 import com.panomc.plugins.linkredirect.LinkRedirectPlugin
-import com.panomc.plugins.linkredirect.db.dao.RedirectDao
+import com.panomc.plugins.linkredirect.db.dao.LinkRedirectDao
 import com.panomc.plugins.linkredirect.permission.ManageRedirectsPermission
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.validation.ValidationHandler
@@ -15,7 +15,7 @@ import io.vertx.json.schema.SchemaRepository
 @Endpoint
 class PanelGetLinkRedirectsAPI(
     private val plugin: LinkRedirectPlugin,
-    private val redirectDao: RedirectDao
+    private val linkRedirectDao: LinkRedirectDao
 ) : PanelApi() {
     override val paths = listOf(Path("/api/panel/link-redirects", RouteType.GET))
 
@@ -37,8 +37,8 @@ class PanelGetLinkRedirectsAPI(
         val page = context.request().getParam("page")?.toIntOrNull() ?: 1
         val sqlClient = databaseManager.getSqlClient()
         
-        val redirects = redirectDao.getAll(page, sqlClient)
-        val totalCount = redirectDao.count(sqlClient)
+        val redirects = linkRedirectDao.getAll(page, sqlClient)
+        val totalCount = linkRedirectDao.count(sqlClient)
         val totalPage = (totalCount + 9) / 10
 
         return Successful(

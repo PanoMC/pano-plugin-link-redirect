@@ -6,7 +6,7 @@ import com.panomc.platform.db.DatabaseManager
 import com.panomc.platform.error.NotFound
 import com.panomc.platform.model.*
 import com.panomc.plugins.linkredirect.LinkRedirectPlugin
-import com.panomc.plugins.linkredirect.db.dao.RedirectDao
+import com.panomc.plugins.linkredirect.db.dao.LinkRedirectDao
 import com.panomc.plugins.linkredirect.log.RedirectDeletedLog
 import com.panomc.plugins.linkredirect.permission.ManageRedirectsPermission
 import io.vertx.ext.web.RoutingContext
@@ -19,7 +19,7 @@ import io.vertx.json.schema.common.dsl.Schemas.numberSchema
 @Endpoint
 class PanelDeleteLinkRedirectAPI(
     private val plugin: LinkRedirectPlugin,
-    private val redirectDao: RedirectDao
+    private val linkRedirectDao: LinkRedirectDao
 ) : PanelApi() {
     override val paths = listOf(Path("/api/panel/link-redirects/:id", RouteType.DELETE))
 
@@ -41,9 +41,9 @@ class PanelDeleteLinkRedirectAPI(
 
         val id = context.pathParam("id").toLong()
         val sqlClient = databaseManager.getSqlClient()
-        val existing = redirectDao.getById(id, sqlClient) ?: throw NotFound()
+        val existing = linkRedirectDao.getById(id, sqlClient) ?: throw NotFound()
 
-        redirectDao.deleteById(id, sqlClient)
+        linkRedirectDao.deleteById(id, sqlClient)
 
         val userId = authProvider.getUserIdFromRoutingContext(context)
         val username = databaseManager.userDao.getUsernameFromUserId(userId, sqlClient)!!
