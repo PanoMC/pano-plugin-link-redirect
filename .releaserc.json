@@ -12,16 +12,16 @@
     [
       "@PanoMC/semantic-release-pano",
       {
-        "file": "build/libs/pano-plugin-link-redirect-${version}.jar",
+        "file": "build/libs/pano-plugin-link-redirects-${version}.jar",
         "panoVersion": "1.0.0",
         "configs": [
           {
-            "resourceId": "pano-plugin-link-redirect",
+            "resourceId": "pano-plugin-link-redirects",
             "panoUrl": "https://api-dev.panomc.com",
             "tokenVar": "PANO_TOKEN"
           },
           {
-            "resourceId": "pano-plugin-link-redirect",
+            "resourceId": "pano-plugin-link-redirects",
             "panoUrl": "https://api.panomc.com",
             "tokenVar": "PANO_PROD_TOKEN"
           }
