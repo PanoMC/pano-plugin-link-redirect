@@ -3,7 +3,7 @@
   import tooltip from '@panomc/sdk/utils/tooltip';
   import { showToast } from '@panomc/sdk/toasts';
   import { copy } from '@panomc/sdk/utils/text';
-  
+
   export let redirect;
   export let onEditClick;
   export let onDeleteClick;
@@ -11,7 +11,7 @@
   function copyLink() {
     const url = new URL(window.location.origin + redirect.path);
     copy(url.toString());
-    showToast('plugins.pano-plugin-link-redirects.pages.redirects.toasts.copy-success');
+    showToast('plugins.pano-plugin-link-redirect.pages.redirects.toasts.copy-success');
   }
 </script>
 
@@ -20,7 +20,7 @@
     <div class="dropdown position-static">
       <button
         type="button"
-        class="btn btn-link"
+        class="btn btn-link focus-ring rounded"
         aria-expanded="false"
         aria-haspopup="true"
         data-bs-toggle="dropdown"
@@ -28,20 +28,14 @@
         aria-label={$_('pages.redirects.actions.label')}>
         <span class="fas fa-ellipsis-v"></span>
       </button>
-      <div class="dropdown-menu dropdown-menu-start animate__animated animate__fadeIn">
-        <button
-          type="button"
-          class="dropdown-item"
-          on:click={() => onEditClick(redirect.id)}>
+      <div class="dropdown-menu dropdown-menu-start">
+        <button type="button" class="dropdown-item" on:click={() => onEditClick(redirect.id)}>
           <span>
             <i class="fas fa-edit me-2"></i>
             {$_('common.edit')}
           </span>
         </button>
-        <button
-          type="button"
-          class="dropdown-item"
-          on:click={copyLink}>
+        <button type="button" class="dropdown-item" on:click={copyLink}>
           <span>
             <i class="fas fa-copy me-2"></i>
             {$_('pages.redirects.actions.copy-link')}
@@ -49,7 +43,7 @@
         </button>
         <button
           type="button"
-          class="dropdown-item"
+          class="dropdown-item link-danger"
           on:click={() => onDeleteClick(redirect.id)}>
           <i class="fas fa-trash me-2"></i>
           <span> {$_('common.delete')} </span>
@@ -61,7 +55,7 @@
     <code>{redirect.id}</code>
   </td>
   <td class="align-middle">
-   <div class="text-truncate">
+    <div class="text-truncate">
       <button
         type="button"
         title={redirect.title}
@@ -72,26 +66,36 @@
         {redirect.title}
       </button>
       {#if redirect.useCustomPage}
-        <span class="badge bg-info-subtle text-info border border-info-subtle ms-1" style="font-size: 10px;">CUSTOM</span>
+        <span class="badge text-bg-gray rounded-pill ms-1">{$_('pages.redirects.fields.design-options.custom')}</span>
       {/if}
     </div>
   </td>
   <td class="align-middle">
-    <div class="d-flex align-items-center gap-2">
-      <span class="badge bg-light text-dark font-monospace border">{$_('pages.redirects.fields.path-hint-short') || '/'}</span>
-      <code class="text-primary">{redirect.path}</code>
-    </div>
+    <a
+      href={redirect.path}
+      target="_blank"
+      rel="noopener noreferrer"
+      use:tooltip={[$_('common.view')]}
+      aria-label={$_('common.view')}
+      class="text-decoration-none">
+      {redirect.path}
+    </a>
   </td>
   <td class="align-middle">
     <div class="text-truncate" style="max-width: 250px;">
-      <a href={redirect.targetUrl} target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+      <a
+        href={redirect.targetUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        use:tooltip={[$_('common.view')]}
+        aria-label={$_('common.view')}
+        class="text-decoration-none">
         {redirect.targetUrl}
       </a>
     </div>
   </td>
   <td class="align-middle text-nowrap">
-    <span class="badge bg-light text-dark font-monospace border">
-        {redirect.delay}s
-    </span>
+    {redirect.delay}{$_('common.seconds').toLowerCase().substring(0, 1)}
   </td>
 </tr>
+

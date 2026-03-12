@@ -4,7 +4,7 @@ import { _ as i18n } from '@panomc/sdk/utils/language';
 import ApiUtil from '@panomc/sdk/utils/api';
 import { showToast } from '@panomc/sdk/toasts';
 
-const pluginId = 'pano-plugin-link-redirects';
+const pluginId = 'pano-plugin-link-redirect';
 
 // this is to render plugin translations
 export const _ = derived(i18n, ($_fn) => {

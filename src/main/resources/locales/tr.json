@@ -6,27 +6,29 @@
     "error": "Hata",
     "seconds": "Saniye",
     "edit": "Düzenle",
-    "delete": "Sil"
+    "delete": "Sil",
+    "view": "Görüntüle",
+    "create": "Oluştur"
   },
   "pages": {
     "redirects": {
-      "title": "URL Yönlendirmeleri",
-      "new-redirect": "Yeni Yönlendirme",
+      "title": "Yönlendirmeler",
+      "new-redirect": "Yönlendirme Oluştur",
       "count": "{count} Yönlendirme",
       "table": {
         "id": "ID",
         "title": "Başlık",
-        "path": "Adres",
-        "target": "Yönlendirme URL",
+        "path": "Yol",
+        "target": "Hedef Bağlantı",
         "delay": "Gecikme",
         "actions": "İşlemler"
       },
       "fields": {
         "title": "Başlık",
-        "path": "Adres",
-        "path-hint": "Yönlendirmeyi tetikleyecek dış adres",
-        "path-hint-short": "Adres",
-        "target": "Yönlendirme URL",
+        "path": "Yol",
+        "path-hint": "Yönlendirmeyi tetikleyecek site içi yol",
+        "path-hint-short": "Yol",
+        "target": "Hedef Bağlantı",
         "delay": "Gecikme",
         "show-intermediate": "Ara sayfa göster",
         "design": "Tasarım",
@@ -49,15 +51,15 @@
         }
       },
       "modals": {
-        "create-title": "URL Yönlendirmesi Oluştur",
-        "edit-title": "URL Yönlendirmesini Düzenle",
-        "delete-title": "URL Yönlendirmesini Sil",
+        "create-title": "Yönlendirme Oluştur",
+        "edit-title": "Yönlendirme Düzenle",
+        "delete-title": "Yönlendirmeyi Sil",
         "delete-confirm": "{title} yönlendirmesini silmek istediğinize emin misiniz? Bu işlem geri alınamaz."
       },
       "toasts": {
-        "create-success": "URL yönlendirmesi başarıyla oluşturuldu.",
-        "edit-success": "URL yönlendirmesi başarıyla güncellendi.",
-        "delete-success": "URL yönlendirmesi başarıyla silindi.",
+        "create-success": "Yönlendirme başarıyla oluşturuldu.",
+        "edit-success": "Yönlendirme başarıyla güncellendi.",
+        "delete-success": "Yönlendirme başarıyla silindi.",
         "copy-success": "Bağlantı panoya kopyalandı."
       },
       "actions": {
