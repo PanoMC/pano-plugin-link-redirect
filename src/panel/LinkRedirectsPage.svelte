@@ -61,7 +61,7 @@
 </article>
 
 <script context="module">
-  import ApiUtil, { buildQueryParams } from '@panomc/sdk/utils/api';
+  import ApiUtil, {buildQueryParams} from '@panomc/sdk/utils/api';
 
   export async function load(event) {
     const {
@@ -70,7 +70,7 @@
     } = event;
     const { pageTitle } = await parent();
 
-    pageTitle.set('plugins.pano-plugin-link-redirect.pages.redirects.title');
+    pageTitle.set('plugins.pano-plugin-link-redirects.pages.redirects.title');
 
     const page = searchParams.get('page') || 1;
     const queryParams = buildQueryParams({ page });

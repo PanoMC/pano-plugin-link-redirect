@@ -1,10 +1,9 @@
-import { PanoPlugin, viewComponent } from '@panomc/sdk';
-import { derived } from 'svelte/store';
-import { _ as i18n } from '@panomc/sdk/utils/language';
+import {PanoPlugin, viewComponent} from '@panomc/sdk';
+import {derived} from 'svelte/store';
+import {_ as i18n} from '@panomc/sdk/utils/language';
 import ApiUtil from '@panomc/sdk/utils/api';
-import { showToast } from '@panomc/sdk/toasts';
 
-const pluginId = 'pano-plugin-link-redirect';
+const pluginId = 'pano-plugin-link-redirects';
 
 // this is to render plugin translations
 export const _ = derived(i18n, ($_fn) => {

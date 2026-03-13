@@ -1,8 +1,7 @@
 <script>
-  import { _ } from '../../main';
-  import tooltip from '@panomc/sdk/utils/tooltip';
-  import { showToast } from '@panomc/sdk/toasts';
-  import { copy } from '@panomc/sdk/utils/text';
+  import {_} from '../../main';
+  import {showToast} from '@panomc/sdk/toasts';
+  import {copy} from '@panomc/sdk/utils/text';
 
   export let redirect;
   export let onEditClick;
@@ -11,7 +10,7 @@
   function copyLink() {
     const url = new URL(window.location.origin + redirect.path);
     copy(url.toString());
-    showToast('plugins.pano-plugin-link-redirect.pages.redirects.toasts.copy-success');
+    showToast('plugins.pano-plugin-link-redirects.pages.redirects.toasts.copy-success');
   }
 </script>
 

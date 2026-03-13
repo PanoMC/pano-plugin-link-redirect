@@ -212,7 +212,7 @@
 </div>
 
 <script context="module">
-  import { get, writable } from 'svelte/store';
+  import {get, writable} from 'svelte/store';
 
   const modalElement = writable();
   const mode = writable('create');
@@ -340,7 +340,7 @@
     if (res && !res.error) {
       hide();
       callback();
-      showToast(`plugins.pano-plugin-link-redirect.pages.redirects.toasts.${$mode}-success`);
+      showToast(`plugins.pano-plugin-link-redirects.pages.redirects.toasts.${$mode}-success`);
     } else {
       showToast(`common.error`);
     }
