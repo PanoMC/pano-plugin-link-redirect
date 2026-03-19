@@ -3,7 +3,7 @@ import {derived} from 'svelte/store';
 import {_ as i18n} from '@panomc/sdk/utils/language';
 import ApiUtil from '@panomc/sdk/utils/api';
 
-const pluginId = 'pano-plugin-link-redirects';
+const pluginId = 'pano-plugin-link-redirect';
 
 // this is to render plugin translations
 export const _ = derived(i18n, ($_fn) => {
@@ -20,7 +20,7 @@ export default class PanoLinkRedirectsPlugin extends PanoPlugin {
       pano.ui.page.register({
         path: '/link-redirects',
         component: viewComponent(() => import('./panel/LinkRedirectsPage.svelte')),
-        permission: `pano.plugin.${pluginId}.manage.redirects`,
+        permission: `pano.plugin.pano-plugin-link-redirect.manage.redirects`,
       });
 
       // Add to Sidebar
@@ -28,9 +28,9 @@ export default class PanoLinkRedirectsPlugin extends PanoPlugin {
         const redirectLink = {
           href: '/link-redirects',
           icon: 'fas fa-link',
-          text: `plugins.${pluginId}.pages.redirects.title`,
+          text: `plugins.pano-plugin-link-redirect.pages.redirects.title`,
           startsWith: false,
-          permission: `pano.plugin.${pluginId}.manage.redirects`,
+          permission: `pano.plugin.pano-plugin-link-redirect.manage.redirects`,
         };
 
         const postIndex = navigationItems.findIndex((item) => item.href === '/posts');

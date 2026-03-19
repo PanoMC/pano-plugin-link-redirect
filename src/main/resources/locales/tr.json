@@ -5,6 +5,7 @@
     "cancel": "İptal",
     "error": "Hata",
     "seconds": "Saniye",
+    "seconds-short": "sn",
     "edit": "Düzenle",
     "delete": "Sil",
     "view": "Görüntüle",
@@ -12,23 +13,23 @@
   },
   "pages": {
     "redirects": {
-      "title": "Yönlendirmeler",
+      "title": "Yönlendirme",
       "new-redirect": "Yönlendirme Oluştur",
       "count": "{count} Yönlendirme",
       "table": {
         "id": "ID",
         "title": "Başlık",
-        "path": "Yol",
-        "target": "Hedef Bağlantı",
+        "path": "Adres",
+        "target": "Yönlendirme Bağlantısı",
         "delay": "Gecikme",
         "actions": "İşlemler"
       },
       "fields": {
         "title": "Başlık",
-        "path": "Yol",
-        "path-hint": "Yönlendirmeyi tetikleyecek site içi yol",
-        "path-hint-short": "Yol",
-        "target": "Hedef Bağlantı",
+        "path": "Adres",
+        "path-hint": "Yönlendirmeyi tetikleyecek dış adres",
+        "path-hint-short": "Adres",
+        "target": "Yönlendirme Bağlantısı",
         "delay": "Gecikme",
         "show-intermediate": "Ara sayfa göster",
         "design": "Tasarım",
@@ -65,6 +66,15 @@
       "actions": {
         "label": "İşlemler",
         "copy-link": "Bağlantıyı Kopyala"
+      },
+      "custom-page": "Özel Sayfa",
+      "theme": {
+        "redirecting": "Yönlendiriliyor",
+        "redirecting-to-in": "{hostname} adresine {seconds} saniye içinde yönlendiriliyorsunuz...",
+        "taking-you-to": "{hostname} adresine yönlendiriliyorsunuz",
+        "please-wait": "Yönlendirilirken lütfen bekleyin...",
+        "redirect-in": "{seconds} saniye içinde yönlendirileceksiniz.",
+        "redirecting-now": "Yönlendiriliyorsunuz..."
       }
     }
   },

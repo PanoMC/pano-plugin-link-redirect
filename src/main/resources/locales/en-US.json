@@ -5,6 +5,7 @@
     "cancel": "Cancel",
     "error": "Error",
     "seconds": "Seconds",
+    "seconds-short": "s",
     "edit": "Edit",
     "delete": "Delete",
     "view": "View",
@@ -12,23 +13,23 @@
   },
   "pages": {
     "redirects": {
-      "title": "Link Redirects",
+      "title": "Link Redirect",
       "new-redirect": "Create Redirect",
-      "count": "{count} Link Redirects",
+      "count": "{count} Redirects",
       "table": {
         "id": "ID",
         "title": "Title",
-        "path": "Path",
-        "target": "Target URL",
+        "path": "Address",
+        "target": "Redirect Link",
         "delay": "Delay",
         "actions": "Actions"
       },
       "fields": {
         "title": "Title",
-        "path": "Path",
-        "path-hint": "External path that will trigger the redirect",
-        "path-hint-short": "Path",
-        "target": "Target URL",
+        "path": "Address",
+        "path-hint": "External address that will trigger the redirect",
+        "path-hint-short": "Address",
+        "target": "Redirect Link",
         "delay": "Delay",
         "show-intermediate": "Show intermediate page",
         "design": "Design",
@@ -51,7 +52,7 @@
         }
       },
       "modals": {
-        "create-title": "Add Redirect",
+        "create-title": "Create Redirect",
         "edit-title": "Edit Redirect",
         "delete-title": "Delete Link Redirect",
         "delete-confirm": "Are you sure you want to delete {title}? This action cannot be undone."
@@ -65,13 +66,22 @@
       "actions": {
         "label": "Actions",
         "copy-link": "Copy Link"
+      },
+      "custom-page": "Custom Page",
+      "theme": {
+        "redirecting": "Redirecting",
+        "redirecting-to-in": "Redirecting to {hostname} in {seconds}s...",
+        "taking-you-to": "Taking you to {hostname}",
+        "please-wait": "Please wait while we redirect you...",
+        "redirect-in": "You will be redirected in {seconds} seconds.",
+        "redirecting-now": "You are being redirected..."
       }
     }
   },
   "permissions": {
     "MANAGE_REDIRECTS": {
-      "title": "Manage Redirects",
-      "description": "Can create, delete, edit a redirect which will be used in theme."
+      "title": "Edit Redirects",
+      "description": "Can create, delete and edit a redirect which will be used in theme."
     }
   },
   "activity-logs": {

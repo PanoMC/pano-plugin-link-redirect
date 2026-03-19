@@ -1,82 +1,92 @@
 {
-    "common": {
-        "close": "Закрыть",
-        "save": "Сохранить",
-        "cancel": "Отмена",
-        "error": "Ошибка",
-        "seconds": "Секунды",
-        "edit": "Редактировать",
-        "delete": "Удалить",
-        "view": "Просмотр",
-        "create": "Создать"
-    },
-    "pages": {
-        "redirects": {
-            "title": "Перенаправления ссылок",
-            "new-redirect": "Создать перенаправление",
-            "count": "{count} Перенаправлений",
-            "table": {
-                "id": "ID",
-                "title": "Заголовок",
-                "path": "Путь",
-                "target": "Целевой URL",
-                "delay": "Задержка",
-                "actions": "Действия"
-            },
-            "fields": {
-                "title": "Заголовок",
-                "path": "Путь",
-                "path-hint": "Внутренний путь на сайте, который вызовет перенаправление",
-                "path-hint-short": "Путь",
-                "target": "Целевой URL",
-                "delay": "Задержка",
-                "show-intermediate": "Показать промежуточную страницу",
-                "design": "Дизайн",
-                "open-new-tab": "Открыть в новой вкладке",
-                "show-in-nav": "Показать в навигации",
-                "require-login": "Требуется вход",
-                "require-permission": "Требуется разрешение",
-                "permission-node": "Узел разрешения",
-                "custom-content": "Контент своей страницы",
-                "design-options": {
-                    "default": "По умолчанию",
-                    "minimal": "Минимальный",
-                    "modern": "Современный",
-                    "custom": "Свой"
-                },
-                "placeholders": {
-                    "path": "discord",
-                    "target": "https://discord.gg/pano",
-                    "permission": "pano.custom.perm"
-                }
-            },
-            "modals": {
-                "create-title": "Создать перенаправление",
-                "edit-title": "Редактировать перенаправление",
-                "delete-title": "Удалить перенаправление",
-                "delete-confirm": "Вы уверены, что хотите удалить {title}? Это действие нельзя отменить."
-            },
-            "toasts": {
-                "create-success": "Перенаправление успешно создано.",
-                "edit-success": "Перенаправление успешно обновлено.",
-                "delete-success": "Перенаправление успешно удалено.",
-                "copy-success": "Ссылка скопирована в буфер обмена."
-            },
-            "actions": {
-                "label": "Действия",
-                "copy-link": "Копировать ссылку"
-            }
+  "common": {
+    "close": "Закрыть",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "error": "Ошибка",
+    "seconds": "Секунды",
+    "seconds-short": "с",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "view": "Просмотр",
+    "create": "Создать"
+  },
+  "pages": {
+    "redirects": {
+      "title": "Перенаправление ссылок",
+      "new-redirect": "Создать перенаправление",
+      "count": "{count} Перенаправлений",
+      "table": {
+        "id": "ID",
+        "title": "Заголовок",
+        "path": "Адрес",
+        "target": "Ссылка для перенаправления",
+        "delay": "Задержка",
+        "actions": "Действия"
+      },
+      "fields": {
+        "title": "Заголовок",
+        "path": "Адрес",
+        "path-hint": "Внешний адрес, который вызовет перенаправление",
+        "path-hint-short": "Адрес",
+        "target": "Ссылка для перенаправления",
+        "delay": "Задержка",
+        "show-intermediate": "Показать промежуточную страницу",
+        "design": "Дизайн",
+        "open-new-tab": "Открыть в новой вкладке",
+        "show-in-nav": "Показать в навигации",
+        "require-login": "Требуется вход",
+        "require-permission": "Требуется разрешение",
+        "permission-node": "Узел разрешения",
+        "custom-content": "Контент своей страницы",
+        "design-options": {
+          "default": "По умолчанию",
+          "minimal": "Минимальный",
+          "modern": "Современный",
+          "custom": "Свой"
+        },
+        "placeholders": {
+          "path": "discord",
+          "target": "https://discord.gg/pano",
+          "permission": "pano.custom.perm"
         }
-    },
-    "permissions": {
-        "MANAGE_REDIRECTS": {
-            "title": "Управление перенаправлениями",
-            "description": "Может создавать, редактировать и удалять перенаправления, которые будут использоваться в теме."
-        }
-    },
-    "activity-logs": {
-        "CREATED_REDIRECT": "<b>{username}</b> создал перенаправление \"{title}\".",
-        "UPDATED_REDIRECT": "<b>{username}</b> обновил перенаправление \"{title}\".",
-        "DELETED_REDIRECT": "<b>{username}</b> удалил перенаправление \"{title}\"."
+      },
+      "modals": {
+        "create-title": "Создать перенаправление",
+        "edit-title": "Редактировать перенаправление",
+        "delete-title": "Удалить ссылку перенаправления",
+        "delete-confirm": "Вы уверены, что хотите удалить {title}? Это действие нельзя отменить."
+      },
+      "toasts": {
+        "create-success": "Перенаправление успешно создано.",
+        "edit-success": "Перенаправление успешно обновлено.",
+        "delete-success": "Перенаправление успешно удалено.",
+        "copy-success": "Ссылка скопирована в буфер обмена."
+      },
+      "actions": {
+        "label": "Действия",
+        "copy-link": "Копировать ссылку"
+      },
+      "custom-page": "Своя страница",
+      "theme": {
+        "redirecting": "Перенаправление",
+        "redirecting-to-in": "Перенаправление на {hostname} через {seconds}с...",
+        "taking-you-to": "Переходим на {hostname}",
+        "please-wait": "Пожалуйста, подождите, пока мы вас перенаправляем...",
+        "redirect-in": "Вы будете перенаправлены через {seconds} секунд.",
+        "redirecting-now": "Вы перенаправляетесь..."
+      }
     }
+  },
+  "permissions": {
+    "MANAGE_REDIRECTS": {
+      "title": "Редактировать перенаправления",
+      "description": "Может создавать, редактировать и удалять перенаправления, которые будут использоваться в теме."
+    }
+  },
+  "activity-logs": {
+    "CREATED_REDIRECT": "<b>{username}</b> создал перенаправление \"{title}\".",
+    "UPDATED_REDIRECT": "<b>{username}</b> обновил перенаправление \"{title}\".",
+    "DELETED_REDIRECT": "<b>{username}</b> удалил перенаправление \"{title}\"."
+  }
 }

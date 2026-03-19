@@ -1,19 +1,3 @@
-<script>
-  import {_} from '../../main';
-  import {showToast} from '@panomc/sdk/toasts';
-  import {copy} from '@panomc/sdk/utils/text';
-
-  export let redirect;
-  export let onEditClick;
-  export let onDeleteClick;
-
-  function copyLink() {
-    const url = new URL(window.location.origin + redirect.path);
-    copy(url.toString());
-    showToast('plugins.pano-plugin-link-redirects.pages.redirects.toasts.copy-success');
-  }
-</script>
-
 <tr>
   <th scope="row" class="align-middle text-center" style="width: 60px;">
     <div class="dropdown position-static">
@@ -65,7 +49,7 @@
         {redirect.title}
       </button>
       {#if redirect.useCustomPage}
-        <span class="badge text-bg-gray rounded-pill ms-1">{$_('pages.redirects.fields.design-options.custom')}</span>
+        <span class="badge text-bg-gray rounded-pill ms-1">{$_('pages.redirects.custom-page')}</span>
       {/if}
     </div>
   </td>
@@ -94,7 +78,23 @@
     </div>
   </td>
   <td class="align-middle text-nowrap">
-    {redirect.delay}{$_('common.seconds').toLowerCase().substring(0, 1)}
+    {redirect.delay}{$_('common.seconds-short') || 's'}
   </td>
 </tr>
 
+<script>
+  import { _ } from '../../main';
+  import tooltip from '@panomc/sdk/utils/tooltip';
+  import { showToast } from '@panomc/sdk/toasts';
+  import { copy } from '@panomc/sdk/utils/text';
+
+  export let redirect;
+  export let onEditClick;
+  export let onDeleteClick;
+
+  function copyLink() {
+    const url = new URL(window.location.origin + redirect.path);
+    copy(url.toString());
+    showToast('plugins.pano-plugin-link-redirect.pages.redirects.toasts.copy-success');
+  }
+</script>

@@ -4,17 +4,17 @@
             {#if redirect.intermediatePageDesign === 'MINIMAL'}
                 <div class="pano-redirect-loader" style="border-width: 3px; width: 32px; height: 32px; margin: 0 1rem 0 0; border-top-color: white; border-right-color: transparent;"></div>
                 <div style="font-size: 1.1rem; font-weight: 500;">
-                    Redirecting to <b>{hostname}</b>{#if remaining > 0} in <span id="pano-redirect-countdown">{remaining}</span>s{/if}...
+                    {$_('pages.redirects.theme.redirecting-to-in', { values: { hostname, seconds: remaining } })}
                 </div>
             {:else if redirect.intermediatePageDesign === 'MODERN'}
                 <div class="pano-redirect-card" style="background: #1f2937; color: white;">
                     <div class="pano-redirect-loader" style="border-top-color: #60a5fa; border-right-color: transparent;"></div>
-                    <div class="pano-redirect-title" style="color: white;">Redirecting</div>
-                    <div class="pano-redirect-url" style="color: #9ca3af;">Taking you to {hostname}</div>
+                    <div class="pano-redirect-title" style="color: white;">{$_('pages.redirects.theme.redirecting')}</div>
+                    <div class="pano-redirect-url" style="color: #9ca3af;">{$_('pages.redirects.theme.taking-you-to', { values: { hostname } })}</div>
                     <div class="pano-redirect-progress-container" style="background: #374151;">
                         <div id="pano-redirect-progress" class="pano-redirect-progress-bar" style="background: #60a5fa; width: {progress}%"></div>
                     </div>
-                    <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #6b7280;">Please wait while we redirect you...</div>
+                    <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #6b7280;">{$_('pages.redirects.theme.please-wait')}</div>
                 </div>
             {:else if redirect.intermediatePageDesign === 'CUSTOM'}
                 <!-- Custom design: We don't render standard cards. 
@@ -23,13 +23,13 @@
             {:else}
                 <div class="pano-redirect-card">
                     <div class="pano-redirect-loader"></div>
-                    <div class="pano-redirect-title">Redirecting...</div>
+                    <div class="pano-redirect-title">{$_('pages.redirects.theme.redirecting')}...</div>
                     <div class="pano-redirect-url">{redirect.targetUrl}</div>
                     <div class="mt-3">
                         {#if remaining > 0}
-                            You will be redirected in <b>{remaining}</b> seconds.
+                            {$_('pages.redirects.theme.redirect-in', { values: { seconds: remaining } })}
                         {:else}
-                            You are being redirected...
+                            {$_('pages.redirects.theme.redirecting-now')}
                         {/if}
                     </div>
                 </div>
@@ -171,6 +171,7 @@
 
 <script>
   import { onMount } from 'svelte';
+  import { _ } from '../main';
   export let data;
   
   const redirect = data?.redirect;
