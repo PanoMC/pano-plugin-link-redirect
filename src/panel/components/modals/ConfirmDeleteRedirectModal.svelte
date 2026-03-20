@@ -34,9 +34,9 @@
 </div>
 
 <script context="module">
-  import {get, writable} from 'svelte/store';
+    import {get, writable} from 'svelte/store';
 
-  const modalElement = writable();
+    const modalElement = writable();
   const redirect = writable(null);
   let callback = () => {};
   let modal;
@@ -78,7 +78,7 @@
     if (!res.error) {
       hide();
       callback();
-      showToast('plugins.pano-plugin-link-redirect.pages.redirects.toasts.delete-success');
+      showToast('plugins.pano-plugin-link-redirects.pages.redirects.toasts.delete-success');
     } else {
         showToast('common.error');
     }

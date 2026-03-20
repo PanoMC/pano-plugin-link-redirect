@@ -340,7 +340,7 @@
     if (res && !res.error) {
       hide();
       callback();
-      showToast(`plugins.pano-plugin-link-redirect.pages.redirects.toasts.${$mode}-success`);
+      showToast(`plugins.pano-plugin-link-redirects.pages.redirects.toasts.${$mode}-success`);
     } else {
       showToast(`common.error`);
     }
