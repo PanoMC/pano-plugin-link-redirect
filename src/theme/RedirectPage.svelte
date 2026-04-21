@@ -160,8 +160,9 @@
       return error(404, 'Redirect not found or access denied');
     }
 
-    // Optimization: If no delay, no intermediate page, and no custom content, redirect immediately on server
-    if ((res.delay || 0) <= 0 && !res.showIntermediatePage && !res.useCustomPage && !res.openInNewTab) {
+    // Optimization: If no delay, no intermediate page, and no custom content, redirect immediately on server.
+    // openInNewTab only affects theme nav link target (main.js); direct visits always follow in the same tab.
+    if ((res.delay || 0) <= 0 && !res.showIntermediatePage && !res.useCustomPage) {
         throw svelteRedirect(302, res.targetUrl);
     }
 
@@ -208,10 +209,7 @@
 
   function performRedirect() {
     if (!redirect) return;
-    if (redirect.openInNewTab) {
-      window.open(redirect.targetUrl, '_blank');
-    } else {
-      window.location.href = redirect.targetUrl;
-    }
+    // Same-tab navigation: "open in new tab" applies only to nav links (target _blank on the redirect path).
+    window.location.href = redirect.targetUrl;
   }
 </script>
