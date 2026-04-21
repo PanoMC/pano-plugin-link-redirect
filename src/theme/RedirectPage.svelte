@@ -1,4 +1,8 @@
-<div class="pano-redirect-page" class:has-custom-content={redirect?.useCustomPage} style={redirect?.useCustomPage ? 'display: block;' : ''}>
+<div
+  class="pano-redirect-page"
+  class:has-custom-content={redirect?.useCustomPage}
+  class:pano-redirect-instant={isInstantRedirectUi(redirect)}
+  style={redirect?.useCustomPage ? 'display: block;' : ''}>
     {#if redirect && redirect.showIntermediatePage}
         <div class="pano-redirect-overlay" class:has-custom-content={redirect?.useCustomPage}>
             {#if redirect.intermediatePageDesign === 'MINIMAL'}
@@ -52,7 +56,8 @@
     align-items: center;
   }
 
-  .pano-redirect-page:not(.has-custom-content) {
+  /* Full black only when showing intermediate overlay or a delayed non-intermediate wait (legacy). */
+  .pano-redirect-page:not(.has-custom-content):not(.pano-redirect-instant) {
     background: #000;
   }
 
@@ -144,8 +149,29 @@
   import ApiUtil from '@panomc/sdk/utils/api';
   import { error, redirect as svelteRedirect } from '@panomc/sdk/svelte';
 
+  /** API / stores may hand back non-boolean flags; `"false"` is truthy in JS and would wrongly show intermediate UI. */
+  function coerceBool(v) {
+    if (v === true || v === 1) return true;
+    if (v === false || v === 0) return false;
+    if (v == null || v === '') return false;
+    if (typeof v === 'string') {
+      const s = v.trim().toLowerCase();
+      return s === 'true' || s === '1' || s === 'yes';
+    }
+    return false;
+  }
+
+  function normalizeRedirectPayload(res) {
+    if (!res || typeof res !== 'object') return res;
+    return {
+      ...res,
+      showIntermediatePage: coerceBool(res.showIntermediatePage),
+      useCustomPage: coerceBool(res.useCustomPage),
+      openInNewTab: coerceBool(res.openInNewTab),
+    };
+  }
+
   export async function load(event) {
-    const { url } = event;
     const currentPath = event.url.pathname;
 
     const res = await ApiUtil.get({
@@ -160,13 +186,19 @@
       return error(404, 'Redirect not found or access denied');
     }
 
-    // Optimization: If no delay, no intermediate page, and no custom content, redirect immediately on server.
-    // openInNewTab only affects theme nav link target (main.js); direct visits always follow in the same tab.
-    if ((res.delay || 0) <= 0 && !res.showIntermediatePage && !res.useCustomPage) {
-        throw svelteRedirect(302, res.targetUrl);
+    const redirect = normalizeRedirectPayload(res);
+
+    // Instant HTTP redirect when there is no page to render. openInNewTab only sets nav target=_blank
+    // (redirect path opens in a new tab); SSR still responds with 302 so that tab follows to the final URL.
+    if (
+      (Number(redirect.delay) || 0) <= 0 &&
+      !redirect.showIntermediatePage &&
+      !redirect.useCustomPage
+    ) {
+      throw svelteRedirect(302, redirect.targetUrl);
     }
 
-    return { data: { redirect: res } };
+    return { data: { redirect } };
   }
 </script>
 
@@ -177,7 +209,14 @@
   
   const redirect = data?.redirect;
 
-  let remaining = redirect?.delay || 0;
+  /** No intermediate/custom chrome; only a quick client redirect (avoid empty black fullscreen). */
+  function isInstantRedirectUi(r) {
+    if (!r) return false;
+    const delay = Number(r.delay) || 0;
+    return delay <= 0 && !r.showIntermediatePage && !r.useCustomPage;
+  }
+
+  let remaining = Number(redirect?.delay) || 0;
   let progress = 0;
   let hostname = '';
 

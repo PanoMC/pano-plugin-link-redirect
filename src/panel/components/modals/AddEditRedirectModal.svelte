@@ -77,54 +77,9 @@
                   {$_('pages.redirects.fields.show-intermediate')}
                 </label>
               </div>
-
-              {#if $formData.showIntermediatePage}
-                <div class="ms-4 vstack gap-3">
-                  <div class="col-12">
-                    <label for="redirect-delay" class="form-label small text-capitalize"
-                      >{$_('pages.redirects.fields.delay')}</label>
-                    <div class="input-group input-group-sm">
-                      <input
-                        type="number"
-                        id="redirect-delay"
-                        class="form-control"
-                        bind:value={$formData.delay}
-                        min="0" />
-                      <span class="input-group-text">{$_('common.seconds')}</span>
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                    <label for="redirect-design" class="form-label small text-capitalize"
-                      >{$_('pages.redirects.fields.design')}</label>
-                    <select
-                      class="form-select form-select-sm"
-                      bind:value={$formData.intermediatePageDesign}>
-                      <option value="DEFAULT"
-                        >{$_('pages.redirects.fields.design-options.default')}</option>
-                      <option value="MINIMAL"
-                        >{$_('pages.redirects.fields.design-options.minimal')}</option>
-                      <option value="MODERN"
-                        >{$_('pages.redirects.fields.design-options.modern')}</option>
-                      <option value="CUSTOM"
-                        >{$_('pages.redirects.fields.design-options.custom') || 'Custom'}</option>
-                    </select>
-                  </div>
-                </div>
-              {/if}
             </div>
 
             <div class="col-md-6 vstack gap-2">
-              <div class="form-check form-switch">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="redirect-new-tab"
-                  bind:checked={$formData.openInNewTab} />
-                <label class="form-check-label text-capitalize" for="redirect-new-tab">
-                  {$_('pages.redirects.fields.open-new-tab')}
-                </label>
-              </div>
               <div class="form-check form-switch">
                 <input
                   class="form-check-input"
@@ -134,6 +89,64 @@
                 <label class="form-check-label text-capitalize" for="redirect-nav">
                   {$_('pages.redirects.fields.show-in-nav')}
                 </label>
+              </div>
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="redirect-new-tab"
+                  disabled={!$formData.showInNavigation}
+                  bind:checked={$formData.openInNewTab} />
+                <label
+                  class="form-check-label text-capitalize"
+                  class:text-muted={!$formData.showInNavigation}
+                  for="redirect-new-tab">
+                  {$_('pages.redirects.fields.open-new-tab')}
+                </label>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="row g-2 g-md-3 align-items-end">
+                <div class="col-12 col-md-6">
+                  <label
+                    for="redirect-delay"
+                    class="form-label small text-capitalize mb-1"
+                    class:text-muted={!$formData.showIntermediatePage}>
+                    {$_('pages.redirects.fields.delay')}</label>
+                  <div class="input-group input-group-sm">
+                    <input
+                      type="number"
+                      id="redirect-delay"
+                      class="form-control"
+                      disabled={!$formData.showIntermediatePage}
+                      bind:value={$formData.delay}
+                      min="0" />
+                    <span class="input-group-text">{$_('common.seconds')}</span>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label
+                    for="redirect-design"
+                    class="form-label small text-capitalize mb-1"
+                    class:text-muted={!$formData.showIntermediatePage}>
+                    {$_('pages.redirects.fields.design')}</label>
+                  <select
+                    id="redirect-design"
+                    class="form-select form-select-sm"
+                    disabled={!$formData.showIntermediatePage}
+                    bind:value={$formData.intermediatePageDesign}>
+                    <option value="DEFAULT"
+                      >{$_('pages.redirects.fields.design-options.default')}</option>
+                    <option value="MINIMAL"
+                      >{$_('pages.redirects.fields.design-options.minimal')}</option>
+                    <option value="MODERN"
+                      >{$_('pages.redirects.fields.design-options.modern')}</option>
+                    <option value="CUSTOM"
+                      >{$_('pages.redirects.fields.design-options.custom') || 'Custom'}</option>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -311,6 +324,10 @@
     if ($formData.useCustomPage !== isCustom) {
       $formData = { ...$formData, useCustomPage: isCustom };
     }
+  }
+
+  $: if (!$formData.showInNavigation && $formData.openInNewTab) {
+    $formData = { ...$formData, openInNewTab: false };
   }
 
   async function onSave() {
