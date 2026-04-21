@@ -86,6 +86,7 @@
   import {_} from '../../main';
   import {showToast} from '@panomc/sdk/toasts';
   import {copy} from '@panomc/sdk/utils/text';
+  import tooltip from '@panomc/sdk/utils/tooltip';
 
   export let redirect;
   export let onEditClick;
