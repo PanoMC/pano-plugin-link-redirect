@@ -85,8 +85,8 @@
     }
   },
   "activity-logs": {
-    "CREATED_REDIRECT": "<b>{username}</b>, \"{title}\" yönlendirmesini oluşturdu.",
-    "UPDATED_REDIRECT": "<b>{username}</b>, \"{title}\" yönlendirmesini güncelledi.",
-    "DELETED_REDIRECT": "<b>{username}</b>, \"{title}\" yönlendirmesini sildi."
+    "REDIRECT_CREATED": "<b>{username}</b>, \"{title}\" yönlendirmesini oluşturdu.",
+    "REDIRECT_UPDATED": "<b>{username}</b>, \"{title}\" yönlendirmesini güncelledi.",
+    "REDIRECT_DELETED": "<b>{username}</b>, \"{title}\" yönlendirmesini sildi."
   }
 }

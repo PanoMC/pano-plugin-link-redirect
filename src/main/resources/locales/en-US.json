@@ -85,8 +85,8 @@
     }
   },
   "activity-logs": {
-    "CREATED_REDIRECT": "<b>{username}</b> created the \"{title}\" redirect.",
-    "UPDATED_REDIRECT": "<b>{username}</b> updated the \"{title}\" redirect.",
-    "DELETED_REDIRECT": "<b>{username}</b> deleted the \"{title}\" redirect."
+    "REDIRECT_CREATED": "<b>{username}</b> created the \"{title}\" redirect.",
+    "REDIRECT_UPDATED": "<b>{username}</b> updated the \"{title}\" redirect.",
+    "REDIRECT_DELETED": "<b>{username}</b> deleted the \"{title}\" redirect."
   }
 }

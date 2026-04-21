@@ -85,8 +85,8 @@
     }
   },
   "activity-logs": {
-    "CREATED_REDIRECT": "<b>{username}</b> создал перенаправление \"{title}\".",
-    "UPDATED_REDIRECT": "<b>{username}</b> обновил перенаправление \"{title}\".",
-    "DELETED_REDIRECT": "<b>{username}</b> удалил перенаправление \"{title}\"."
+    "REDIRECT_CREATED": "<b>{username}</b> создал перенаправление \"{title}\".",
+    "REDIRECT_UPDATED": "<b>{username}</b> обновил перенаправление \"{title}\".",
+    "REDIRECT_DELETED": "<b>{username}</b> удалил перенаправление \"{title}\"."
   }
 }
