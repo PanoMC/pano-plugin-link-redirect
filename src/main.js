@@ -46,6 +46,14 @@ export default class PanoLinkRedirectsPlugin extends PanoPlugin {
       // Theme Redirection Logic
       const redirectPageComponent = viewComponent(() => import('./theme/RedirectPage.svelte'));
 
+      // SSR runs in a long-lived Node process where `registeredPages` and `siteNavLinks` are
+      // module-level state. `theme:app:load` fires on every request, but plugin re-init is
+      // cached by plugin-version hash — so without an explicit unregister step, entries for
+      // deleted/renamed redirects would linger until the process restarts (SSR sees stale
+      // routes/links, CSR sees fresh state → "ghost during SSR, gone after hydration").
+      const registeredPaths = new Set();
+      const navAddedHrefs = new Set();
+
       pano.ui.app.onLoad(async (data, event) => {
         // Fetch active redirects to register their routes
         try {
@@ -54,36 +62,67 @@ export default class PanoLinkRedirectsPlugin extends PanoPlugin {
             request: event
           });
 
-          if (res && Array.isArray(res.redirects)) {
-            res.redirects.forEach((redirect) => {
-              // Register dynamic route for each redirect
-              pano.ui.page.register({
-                path: redirect.path,
-                component: redirectPageComponent,
-                loginRequired: redirect.requireLogin,
-                permission: redirect.requirePermission ? redirect.permissionNode : null,
-                resetLayout: true, // Always reset layout for redirects as per user request
-              });
+          if (!res || !Array.isArray(res.redirects)) return;
 
-              // Add to Theme Navigation if enabled
-              if (redirect.showInNavigation && pano.ui.nav.site.editNavLinks) {
-                pano.ui.nav.site.editNavLinks((navItems) => {
-                  // Check if already exists to avoid duplicates
-                  if (!navItems.find((n) => n.href === redirect.path)) {
-                    navItems.push({
-                      href: redirect.path,
-                      text: redirect.title, // Literal text
-                      target: redirect.openInNewTab ? '_blank' : '_self',
-                      startsWith: false,
-                      loginRequired: redirect.requireLogin,
-                      permission: redirect.requirePermission ? redirect.permissionNode : null,
-                    });
-                  }
-                  return navItems;
-                });
-              }
-            });
+          const incomingPaths = new Set(res.redirects.map((r) => r.path));
+          const incomingNavHrefs = new Set(
+            res.redirects.filter((r) => r.showInNavigation).map((r) => r.path)
+          );
+
+          // Drop route entries we previously registered that are no longer in the response.
+          for (const oldPath of registeredPaths) {
+            if (!incomingPaths.has(oldPath)) {
+              pano.ui.page.unregister(oldPath);
+              registeredPaths.delete(oldPath);
+            }
           }
+
+          // Drop nav links we previously added that should no longer be present (deleted
+          // redirect or showInNavigation toggled off). Only touch hrefs we ourselves added,
+          // so we don't clobber links owned by other plugins.
+          const navHrefsToRemove = [];
+          for (const href of navAddedHrefs) {
+            if (!incomingNavHrefs.has(href)) navHrefsToRemove.push(href);
+          }
+          if (navHrefsToRemove.length && pano.ui.nav.site.editNavLinks) {
+            const removeSet = new Set(navHrefsToRemove);
+            pano.ui.nav.site.editNavLinks((navItems) =>
+              navItems.filter((n) => !removeSet.has(n.href))
+            );
+            for (const href of navHrefsToRemove) navAddedHrefs.delete(href);
+          }
+
+          res.redirects.forEach((redirect) => {
+            // Register dynamic route for each redirect (idempotent: register overwrites
+            // by path, so updates to delay/permission/etc. propagate without a stale entry).
+            pano.ui.page.register({
+              path: redirect.path,
+              component: redirectPageComponent,
+              loginRequired: redirect.requireLogin,
+              permission: redirect.requirePermission ? redirect.permissionNode : null,
+              resetLayout: true, // Always reset layout for redirects as per user request
+            });
+            registeredPaths.add(redirect.path);
+
+            // Add to Theme Navigation if enabled. Replace any existing entry with the same
+            // href so changes to title/target/permission propagate (the old code skipped on
+            // existence, leaving stale titles after a rename in the panel).
+            if (redirect.showInNavigation && pano.ui.nav.site.editNavLinks) {
+              pano.ui.nav.site.editNavLinks((navItems) => {
+                const next = navItems.filter((n) => n.href !== redirect.path);
+                next.push({
+                  href: redirect.path,
+                  text: redirect.title, // Literal text
+                  target: redirect.openInNewTab ? '_blank' : '_self',
+                  startsWith: false,
+                  loginRequired: redirect.requireLogin,
+                  permission: redirect.requirePermission ? redirect.permissionNode : null,
+                });
+                return next;
+              });
+              navAddedHrefs.add(redirect.path);
+            }
+          });
         } catch (e) {
           console.error('[LinkRedirectsPlugin] Failed to fetch redirects for route registration', e);
         }
