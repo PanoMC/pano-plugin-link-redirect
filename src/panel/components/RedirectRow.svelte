@@ -41,7 +41,6 @@
     <div class="text-truncate">
       <button
         type="button"
-        title={redirect.title}
         use:tooltip={[$_('common.edit')]}
         aria-label={$_('common.edit')}
         on:click={() => onEditClick(redirect.id)}
