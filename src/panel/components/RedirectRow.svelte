@@ -7,7 +7,7 @@
         aria-expanded="false"
         aria-haspopup="true"
         data-bs-toggle="dropdown"
-        use:tooltip={[$_('pages.redirects.actions.label')]}
+        title={$_('pages.redirects.actions.label')}
         aria-label={$_('pages.redirects.actions.label')}>
         <span class="fas fa-ellipsis-v"></span>
       </button>
@@ -41,7 +41,7 @@
     <div class="text-truncate">
       <button
         type="button"
-        use:tooltip={[$_('common.edit')]}
+        title={$_('common.edit')}
         aria-label={$_('common.edit')}
         on:click={() => onEditClick(redirect.id)}
         class="btn btn-link p-0 text-start text-decoration-none w-100 text-truncate">
@@ -57,7 +57,7 @@
       href={redirect.path}
       target="_blank"
       rel="noopener noreferrer"
-      use:tooltip={[$_('common.view')]}
+      title={$_('common.view')}
       aria-label={$_('common.view')}
       class="text-decoration-none">
       {redirect.path}
@@ -69,7 +69,7 @@
         href={redirect.targetUrl}
         target="_blank"
         rel="noopener noreferrer"
-        use:tooltip={[$_('common.view')]}
+        title={$_('common.view')}
         aria-label={$_('common.view')}
         class="text-decoration-none">
         {redirect.targetUrl}
@@ -85,7 +85,6 @@
   import {_} from '../../main';
   import {showToast} from '@panomc/sdk/toasts';
   import {copy} from '@panomc/sdk/utils/text';
-  import tooltip from '@panomc/sdk/utils/tooltip';
 
   export let redirect;
   export let onEditClick;
