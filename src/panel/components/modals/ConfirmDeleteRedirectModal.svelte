@@ -61,8 +61,7 @@
 
 <script>
   import ApiUtil from '@panomc/sdk/utils/api';
-  import { showToast } from '@panomc/sdk/toasts';
-  import { _ } from '../../../main';
+  import { _, showSuccessToast, showErrorToast } from '../../../main';
 
   let loading = false;
 
@@ -78,9 +77,9 @@
     if (!res.error) {
       hide();
       callback();
-      showToast('plugins.pano-plugin-link-redirects.pages.redirects.toasts.delete-success');
+      showSuccessToast('plugins.pano-plugin-link-redirects.pages.redirects.toasts.delete-success');
     } else {
-        showToast('common.error');
+      showErrorToast('common.error');
     }
   }
 </script>

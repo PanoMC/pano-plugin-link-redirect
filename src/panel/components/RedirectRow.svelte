@@ -82,8 +82,7 @@
 </tr>
 
 <script>
-  import {_} from '../../main';
-  import {showToast} from '@panomc/sdk/toasts';
+  import { _, showSuccessToast } from '../../main';
   import {copy} from '@panomc/sdk/utils/text';
 
   export let redirect;
@@ -93,6 +92,6 @@
   function copyLink() {
     const url = new URL(window.location.origin + redirect.path);
     copy(url.toString());
-    showToast('plugins.pano-plugin-link-redirects.pages.redirects.toasts.copy-success');
+    showSuccessToast('plugins.pano-plugin-link-redirects.pages.redirects.toasts.copy-success');
   }
 </script>

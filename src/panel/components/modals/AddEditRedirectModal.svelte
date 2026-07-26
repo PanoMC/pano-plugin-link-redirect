@@ -289,9 +289,8 @@
 <script>
   import { onMount } from 'svelte';
   import ApiUtil from '@panomc/sdk/utils/api';
-  import { showToast } from '@panomc/sdk/toasts';
   import { Editor } from '@panomc/sdk/components/panel';
-  import { _ } from '../../../main';
+  import { _, showSuccessToast, showErrorToast } from '../../../main';
 
   let loading = false;
   let origin = '';
@@ -357,9 +356,11 @@
     if (res && !res.error) {
       hide();
       callback();
-      showToast(`plugins.pano-plugin-link-redirects.pages.redirects.toasts.${$mode}-success`);
+      showSuccessToast(
+        `plugins.pano-plugin-link-redirects.pages.redirects.toasts.${$mode}-success`,
+      );
     } else {
-      showToast(`common.error`);
+      showErrorToast(`common.error`);
     }
   }
 </script>
